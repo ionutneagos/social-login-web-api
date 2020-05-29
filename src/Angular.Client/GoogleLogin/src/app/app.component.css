@@ -1,0 +1,22 @@
+.bd-navbar {
+    background-color: #3f51b5;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0 rgba(0, 0, 0, .1);
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.btn-outline-primary.custom-file-control:before, .btn.btn-outline-primary {
+    border-color: currentColor;
+    color: #fff;
+    background-color: transparent;
+    border: 1px solid #fff;
+}

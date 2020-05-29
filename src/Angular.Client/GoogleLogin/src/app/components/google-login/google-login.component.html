@@ -1,0 +1,8 @@
+<button type="button" (click)="signInWithGoogle()" class="btn btn-outline-primary">
+    <span *ngIf="!isLogging">
+        {{capture}}
+    </span>
+    <span *ngIf="isLogging">
+        Authenticating...
+    </span>
+</button>
