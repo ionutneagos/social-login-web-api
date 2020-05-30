@@ -93,5 +93,6 @@ npm install
 
 Start your backend server by following the above instructions.
 
-Run `ng serve` for a dev server. 
+Start angular client: `ng serve`. 
+
 Navigate to `http://localhost:4200/`.
