@@ -70,7 +70,7 @@ Navigate to Web Api Project -> appsettings.json, and update it according to your
 }
 ```
 
->**Note: Automatic migrations are apllied on application startup. You don't need to generate them manually. For doing this, I used [EFCore.AutomaticMigrations](https://www.nuget.org/packages/EFCore.AutomaticMigrations/) package.**
+>**Note: Automatic migrations are applied on application startup. You don't need to generate them manually. For doing this, I used [EFCore.AutomaticMigrations](https://www.nuget.org/packages/EFCore.AutomaticMigrations/) package.**
 
 > *MigrateDatabaseToLatestVersion.ExecuteAsync(context).Wait()* - where context is your application context.
 ```
