@@ -89,6 +89,15 @@ Install dependencies
 ```
 npm install
 ```
+Navigate to Angular.Client/GoogleLogin/src/environments -> environments.ts, and update it according to yours credentials:
+```
+export const environment = {
+  production: false,
+  baseUrl: 'https://localhost:44329', //back-end address
+  googleClientId: "googleClientId",  //Client Id from  Google OAuth Configuration
+};
+```
+
 ## Use / Test
 
 Start your backend server by following the above instructions.
