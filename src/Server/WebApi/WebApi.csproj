@@ -19,7 +19,7 @@
       <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
       <PackageReference Include="Google.Apis.Auth.AspNetCore3" Version="1.45.0-beta01" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.3" />
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.18" />
       <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
