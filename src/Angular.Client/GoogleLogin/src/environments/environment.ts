@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://localhost:44329',
-  googleClientId: "googleClientId",
+  baseUrl: 'http://social-login-api.azurewebsites.net/',
+  googleClientId: "347544653719-21s2rmj3nqtmnjb5vd7rfaos71hup7fg.apps.googleusercontent.com",
 };
 
 /*
@@ -16,4 +16,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

@@ -23,7 +23,7 @@ namespace Infrastructure
             builder.Entity<IdentityUserToken<string>>(entity => { entity.ToTable("UserTokens"); });
             builder.Entity<IdentityRoleClaim<string>>(entity => { entity.ToTable("RoleClaims"); });
 
-            builder.ApplyConfiguration(new AppUserConfiguration());
+            builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly, x => x.Name == nameof(AppDbContext));
         }
     }
 }

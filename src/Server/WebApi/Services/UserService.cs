@@ -10,16 +10,18 @@
     public class UserService : IUserService
     {
         protected readonly UserManager<AppUser> _userManager;
-        public UserService(UserManager<AppUser> userManager)
+        protected readonly IConfiguration _configuration;
+        public UserService(UserManager<AppUser> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
+            _configuration = configuration;
         }
 
         public async Task<AppUser> AuthenticateGoogleUserAsync(GoogleUserRequest request)
         {
             Payload payload = await ValidateAsync(request.IdToken, new ValidationSettings
             {
-                Audience = new[] { Startup.StaticConfig["Authentication:Google:ClientId"] }
+                Audience = new[] { _configuration["Authentication:Google:ClientId"] }
             });
 
             return await GetOrCreateExternalLoginUser(GoogleUserRequest.PROVIDER, payload.Subject, payload.Email, payload.GivenName, payload.FamilyName);
