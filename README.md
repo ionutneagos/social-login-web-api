@@ -9,7 +9,7 @@ urlFragment: social-login-web-api
 
 # Social Login Web Api Sample
 
-This project implements a simple Google Login/Register into a WEB API solution using ASP.NET Core 3.1 for back-end and Angular 9 for client. It demonstrates how you can integrate Social Logins and manage users in the back-end. 
+This project implements a simple Google Login/Register into a WEB API solution using .NET 6.0 for back-end and Angular 13 for client. It demonstrates how you can integrate Social Logins and manage users in the back-end. 
 
 ## Demo
 Check out the live demo here: https://social-login.azurewebsites.net/
