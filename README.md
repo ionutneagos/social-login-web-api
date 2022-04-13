@@ -3,7 +3,7 @@ page_type: sample
 languages:
 - csharp
 - angular 13
-description: "This project implements a simple Google Login/Register into a WEB API solution using ASP.NET Core 3.1 for back-end and Angular 9 for client."
+description: "This project implements a simple Google Login/Register into a WEB API solution using NET 6.0 for back-end and Angular 13 for client."
 urlFragment: social-login-web-api
 ---
 
