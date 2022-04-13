@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { GoogleLoginProvider } from "angularx-social-login";
-import { AuthService as SocialLoginService } from "angularx-social-login";
+import {  SocialAuthService  } from "angularx-social-login";
 import { AuthenticateService } from "../../core/services/authenticate.service";
 
 @Component({
@@ -15,7 +15,7 @@ export class GoogleLoginComponent {
   isLogging: boolean;
 
   constructor(private authService: AuthenticateService,
-    private socialLoginService: SocialLoginService) { }
+    private socialLoginService: SocialAuthService) { }
 
   signInWithGoogle(): void {
     this.isLogging = true;

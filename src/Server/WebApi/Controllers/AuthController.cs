@@ -18,10 +18,11 @@
     public class AuthController : BaseController
     {
         private readonly IUserService _userService;
-
-        public AuthController(UserManager<AppUser> userManager, IUserService userService) : base(userManager)
+        protected readonly IConfiguration _configuration;
+        public AuthController(UserManager<AppUser> userManager, IUserService userService, IConfiguration configuration) : base(userManager)
         {
             _userService = userService;
+            _configuration = configuration;
         }
 
         [AllowAnonymous]
@@ -39,7 +40,7 @@
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(Startup.StaticConfig["Authentication:Jwt:Secret"]);
+            var key = Encoding.ASCII.GetBytes(_configuration["Authentication:Jwt:Secret"]);
 
             var expires = DateTime.UtcNow.AddDays(7);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -47,7 +48,7 @@
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Id) ,
-                    new Claim(JwtRegisteredClaimNames.Sub, Startup.StaticConfig["Authentication:Jwt:Subject"]),
+                    new Claim(JwtRegisteredClaimNames.Sub, _configuration["Authentication:Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                     new Claim(ClaimTypes.Name, user.Id),
@@ -60,8 +61,8 @@
                 Expires = expires,
 
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
-                Issuer = Startup.StaticConfig["Authentication:Jwt:Issuer"],
-                Audience = Startup.StaticConfig["Authentication:Jwt:Audience"]
+                Issuer = _configuration["Authentication:Jwt:Issuer"],
+                Audience = _configuration["Authentication:Jwt:Audience"]
             };
 
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);

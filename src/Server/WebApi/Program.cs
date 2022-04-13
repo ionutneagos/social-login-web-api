@@ -1,46 +1,61 @@
-namespace WebApi
+using Infrastructure;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using WebApi.Extensions;
+using WebApi.Interfaces;
+using WebApi.Middlewares;
+using WebApi.Services;
+
+try
 {
-    using EFCore.AutomaticMigrations;
-    using Microsoft.AspNetCore;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Logging;
-    using WebApi.Models;
+    var builder = WebApplication.CreateBuilder(args);
 
-    public class Program
+    builder.Services.AddCors();
+    builder.Services.AddControllers();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.ConfigureAppSwagger();
+    builder.Services.ConfigureAppSqlDatabase(builder.Configuration);
+    builder.Services.AddAppIdentity(builder.Configuration);
+    builder.Services.AddScoped<IUserService, UserService>();
+    builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+    builder.Services.TryAdd(ServiceDescriptor.Singleton<ILoggerFactory, LoggerFactory>());
+
+    builder.Services.AddMvc(options => options.RespectBrowserAcceptHeader = true);
+  
+    var app = builder.Build();
+
+    app.MapSwagger();
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
     {
-        public static void Main(string[] args)
-        {
-            var host = CreateWebHostBuilder(args);
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-                var logger = loggerFactory.CreateLogger<Program>();
-                try
-                {
-                    var environment = services.GetRequiredService<IWebHostEnvironment>();
-
-                    if (environment.IsDevelopment())
-                    {
-                        var context = services.GetRequiredService<Infrastructure.AppDbContext>();
-                        MigrateDatabaseToLatestVersion.ExecuteAsync(context).Wait();
-                    }
-                }
-                catch (AppException ex)
-                {
-                    logger.LogError(ex, "An error occurred creating/updating the DB.");
-                }
-            }
-
-            host.Run();
-        }
-
-        private static IWebHost CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "GOOGLE AUTH SAMPLE API V1");
+        options.RoutePrefix = string.Empty;
+    });
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
     }
+    app.UseHttpsRedirection();
+
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+    app.UseRouting();
+    app.UseHttpsRedirection();
+    app.UseCors(it => it.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    var scopeFactory = app.Services?.GetService<IServiceScopeFactory>();
+    if (scopeFactory != null)
+    {
+        await scopeFactory.MigrateCatalogDbToLatestVersionAsync();
+    }
+
+    await app.RunAsync();
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Unhandled exception on starting ap: Error: {ex}.");
 }

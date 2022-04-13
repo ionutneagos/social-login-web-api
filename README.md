@@ -2,7 +2,7 @@
 page_type: sample
 languages:
 - csharp
-- angular 9
+- angular 13
 description: "This project implements a simple Google Login/Register into a WEB API solution using ASP.NET Core 3.1 for back-end and Angular 9 for client."
 urlFragment: social-login-web-api
 ---
@@ -19,11 +19,11 @@ Check out the live demo here: https://social-login.azurewebsites.net/
 ## Prerequisites
 
 1. Server
-   * [.NET Core 3.1](https://dotnet.microsoft.com/download) 
-   * [Visual Studio 2017 15.7](https://docs.microsoft.com/en-us/visualstudio/install/update-visual-studio) or newer
+   * [.NET 6.0](https://dotnet.microsoft.com/download)
+   * [Visual Studio 2022](https://docs.microsoft.com/en-us/visualstudio/install/update-visual-studio) or newer
 2. Front End
-   * [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
-   * [Node 10.13](https://nodejs.org/en/download/) or newer
+   * [Angular CLI](https://github.com/angular/angular-cli) version 13.
+   * [Node 12.22.1](https://nodejs.org/en/download/) or newer
    * [Visual Studio Code](https://code.visualstudio.com/) or your preferred editor
 3. Google OAuth Configuration 
    * Navigate to Integrating Google Sign-In into your web app and select Configure a project.
@@ -81,9 +81,9 @@ if (environment.IsDevelopment())
 }
 ```
 #### Front-End
-The front-end is built as an Angular standalone application using npm commands. In order to remove dependencies between UI component frameworks and Angular, the front end HTML/CSS uses plain and simple Bootstrap and is built with Angular 9 using the Angular CLI. This reduces dependency restrictions on any UI component frameworks.
+The front-end is built as an Angular standalone application using npm commands. In order to remove dependencies between UI component frameworks and Angular, the front end HTML/CSS uses plain and simple Bootstrap and is built with Angular 13 using the Angular CLI. This reduces dependency restrictions on any UI component frameworks.
 
->For login authentication is used Angular 9 Social Login npm package, [angularx-social-login](https://www.npmjs.com/package/angularx-social-login)
+>For login authentication is used Angular 13 Social Login npm package, [angularx-social-login](https://www.npmjs.com/package/angularx-social-login)
 
 Install dependencies
 ```

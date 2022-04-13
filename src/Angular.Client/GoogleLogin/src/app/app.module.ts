@@ -10,23 +10,12 @@ import { JwtService } from "../app/core/services/jwt.service";
 import { AuthenticateService } from "../app/core/services/authenticate.service";
 
 /*google social*/
-import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { SocialLoginModule, SocialAuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { environment } from '../environments/environment';
 import { GoogleLoginComponent } from './components/google-login/google-login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 /*end google login*/
-
-const config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider(environment.googleClientId)
-  }
-]);
-
-export function provideConfig() {
-  return config;
-}
 
 @NgModule({
   declarations: [
@@ -49,9 +38,20 @@ export function provideConfig() {
       multi: true
     },
     {
-      provide: AuthServiceConfig,
-      useFactory: provideConfig
-    },
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.googleClientId)
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })
