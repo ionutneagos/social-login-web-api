@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Identity;
     using System.Threading.Tasks;
     using WebApi.Interfaces;
+    using WebApi.Models;
     using WebApi.Models.Auth;
     using static Google.Apis.Auth.GoogleJsonWebSignature;
 
@@ -31,9 +32,12 @@
         private async Task<AppUser> GetOrCreateExternalLoginUser(string provider, string key, string email, string firstName, string lastName)
         {
             var user = await _userManager.FindByLoginAsync(provider, key);
+          
             if (user != null)
                 return user;
+
             user = await _userManager.FindByEmailAsync(email);
+
             if (user == null)
             {
                 user = new AppUser
@@ -45,14 +49,14 @@
                     Id = key,
                 };
                 await _userManager.CreateAsync(user);
+                var info = new UserLoginInfo(provider, key, provider.ToUpperInvariant());
+                var result = await _userManager.AddLoginAsync(user, info);
+              
+                if(!result.Succeeded)
+                    throw new AppException(string.Join(",", result.Errors.Select(x => x.Description).ToList()));
             }
 
-            var info = new UserLoginInfo(provider, key, provider.ToUpperInvariant());
-            var result = await _userManager.AddLoginAsync(user, info);
-            if (result.Succeeded)
-                return user;
-            return null;
-
+            return user;
         }
     }
 }

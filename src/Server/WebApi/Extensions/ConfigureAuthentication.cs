@@ -30,7 +30,7 @@ namespace WebApi.Extensions
                     ValidateAudience = false
                 };
             })
-             .AddGoogle(options =>
+             .AddGoogleOpenIdConnect(options =>
              {
                  options.ClientId = configuration["Authentication:Google:ClientId"];
                  options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
