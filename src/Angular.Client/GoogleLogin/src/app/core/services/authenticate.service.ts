@@ -21,7 +21,6 @@ export class AuthenticateService extends BaseService {
     this.currentUserSubject = new BehaviorSubject<UserToken>(this.jwtService.getUser());
     this.currentUser = this.currentUserSubject.asObservable();
   }
-
   googleLogin(googleUser: GoogleUserRequest): Observable<UserToken> {
     return this.httpClient
       .post<UserToken>(`${this.baseUrl}/api/auth/googleauthenticate`, googleUser)

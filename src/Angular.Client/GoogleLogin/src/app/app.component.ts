@@ -3,6 +3,7 @@ import { AuthenticateService } from './core/services/authenticate.service';
 import { Subscription } from 'rxjs';
 import { UserToken } from './core/models/response/user-token';
 import { environment } from 'src/environments/environment';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-root',
@@ -12,32 +13,42 @@ import { environment } from 'src/environments/environment';
 
 export class AppComponent {
   title = 'Google Login';
+  user: SocialUser | undefined;
   logged = false;
   model: UserToken = null;
   subscription: Subscription;
   webApiUrl: string = `${environment.baseUrl}`;
 
-  constructor(private authService: AuthenticateService) {
+
+  constructor(private authService: AuthenticateService, private socialLoginService: SocialAuthService) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.authService.currentUser.subscribe(data => {
-      if (data) {
-        this.model = data;
-        this.logged = true;
-      }
-      else {
-        this.model = null;
-        this.logged = false;
+
+    this.socialLoginService.authState.subscribe((user) => {
+      this.user = user;
+      if (this.user) {
+        this.authService.googleLogin(user)
+          .subscribe((data) => {
+            this.model = data;
+            this.logged = true;
+          },
+            (error) => {
+              debugger
+              alert(error)
+            });
       }
     });
+
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   logout() {
+    this.socialLoginService.signOut();
     this.authService.logout();
+    this.logged = false;
+
   }
 }

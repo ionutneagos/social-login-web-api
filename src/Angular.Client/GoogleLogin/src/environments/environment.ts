@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://social-login-api.azurewebsites.net/',
+  baseUrl: 'https://localhost:44329',
   googleClientId: "347544653719-21s2rmj3nqtmnjb5vd7rfaos71hup7fg.apps.googleusercontent.com",
 };
 

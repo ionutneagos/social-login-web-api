@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,17 +10,15 @@ import { JwtService } from "../app/core/services/jwt.service";
 import { AuthenticateService } from "../app/core/services/authenticate.service";
 
 /*google social*/
-import { SocialLoginModule, SocialAuthServiceConfig } from "angularx-social-login";
-import { GoogleLoginProvider } from "angularx-social-login";
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { environment } from '../environments/environment';
-import { GoogleLoginComponent } from './components/google-login/google-login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 /*end google login*/
 
 @NgModule({
   declarations: [
     AppComponent,
-    GoogleLoginComponent,
     UserProfileComponent
   ],
   imports: [
@@ -28,6 +26,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     AppRoutingModule,
     HttpClientModule,
     SocialLoginModule,
+    GoogleSigninButtonModule
   ],
   providers: [
     JwtService,
@@ -53,6 +52,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
       } as SocialAuthServiceConfig,
     }
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
