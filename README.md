@@ -19,7 +19,7 @@ Check out the live demo here: https://social-login.azurewebsites.net/
 ## Prerequisites
 
 1. Server
-   * [.NET 6.0](https://dotnet.microsoft.com/download)
+   * [.NET 7.0](https://dotnet.microsoft.com/download)
    * [Visual Studio 2022](https://docs.microsoft.com/en-us/visualstudio/install/update-visual-studio) or newer
 2. Front End
    * [Angular CLI](https://github.com/angular/angular-cli) version 13.
