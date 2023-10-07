@@ -2,7 +2,7 @@
 page_type: sample
 languages:
 - csharp
-- angular 13
+- angular 15
 description: "This project implements a simple Google Login/Register into a WEB API solution using NET 7.0 for back-end and Angular 15 for client."
 urlFragment: social-login-web-api
 ---
@@ -22,7 +22,7 @@ Check out the live demo here: https://social-login.azurewebsites.net/
    * [.NET 7.0](https://dotnet.microsoft.com/download)
    * [Visual Studio 2022](https://docs.microsoft.com/en-us/visualstudio/install/update-visual-studio) or newer
 2. Front End
-   * [Angular CLI](https://github.com/angular/angular-cli) version 13.
+   * [Angular CLI](https://github.com/angular/angular-cli) version 15.
    * [Node 12.22.1](https://nodejs.org/en/download/) or newer
    * [Visual Studio Code](https://code.visualstudio.com/) or your preferred editor
 3. Google OAuth Configuration 
