@@ -94,7 +94,7 @@ Navigate to Angular.Client/GoogleLogin/src/environments -> environments.ts, and 
 export const environment = {
   production: false,
   baseUrl: 'https://localhost:44329', //back-end address
-  googleClientId: "googleClientId",  //Client Id from  Google OAuth Configuration
+  googleClientId: "[Client Id from  Google OAuth Configuration]",  //Client Id from  Google OAuth Configuration
 };
 ```
 
